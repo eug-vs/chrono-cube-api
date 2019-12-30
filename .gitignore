@@ -1,0 +1,8 @@
+# Ignore database
+*.sqlite3
+
+# Byte-compiled / optimized
+**/__pycache__/
+
+# PyCharm
+.idea/
