@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework.viewsets import ModelViewSet
 
-# Create your views here.
+from timer.models import Solution
+from timer.serializers import SolutionSerializer
+
+
+class SolutionViewSet(ModelViewSet):
+    queryset = Solution.objects.all()
+    serializer_class = SolutionSerializer
