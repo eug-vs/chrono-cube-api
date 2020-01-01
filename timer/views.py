@@ -10,3 +10,6 @@ class SolutionViewSet(ModelViewSet):
     serializer_class = SolutionSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['=author__id', '=author__username']
+
+    def perform_create(self, serializer):
+        return serializer.save(author=self.request.user)
