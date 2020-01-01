@@ -1,4 +1,4 @@
 from django.contrib import admin
-from timer.models import Solve
+from timer.models import Solution
 
-admin.site.register(Solve)
+admin.site.register(Solution)
