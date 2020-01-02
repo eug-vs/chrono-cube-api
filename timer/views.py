@@ -10,4 +10,5 @@ class SolutionViewSet(ModelViewSet):
     filterset_fields = ['author']
 
     def perform_create(self, serializer):
-        return serializer.save(author=self.request.user)
+        user = self.request.user
+        return serializer.save(author=None if user.is_anonymous else user)
