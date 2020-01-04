@@ -1,9 +1,12 @@
 import re
 from django.core.exceptions import ValidationError
-from rest_framework.serializers import ModelSerializer, PrimaryKeyRelatedField
+from rest_framework.serializers import (
+    ModelSerializer,
+    PrimaryKeyRelatedField,
+    DateTimeField,
+)
 
-from users.serializers import UserSerializer
-
+from django.contrib.auth.models import User
 from timer.models import Solution
 
 
@@ -11,11 +14,12 @@ result_pattern = re.compile('^\d{2}:\d{2}:\d{2}$')
 
 
 class SolutionSerializer(ModelSerializer):
-    author = UserSerializer(read_only=True)
+    author = PrimaryKeyRelatedField(queryset=User.objects.all(), allow_null=True)
+    date = DateTimeField(read_only=True)
 
     class Meta:
         model = Solution
-        fields = ['id', 'result', 'author']
+        fields = ['id', 'result', 'author', 'date']
 
     def validate(self, attrs):
         if not result_pattern.match(attrs['result']):
